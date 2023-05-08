@@ -1,0 +1,7 @@
+pandas 
+numpy 
+sklearn
+paho-mqtt
+pyspark
+apache-airflow
+pymodbus
