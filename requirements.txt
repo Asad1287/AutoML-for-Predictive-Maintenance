@@ -1,0 +1,16 @@
+pandas 
+numpy 
+scikit-learn
+paho-mqtt
+pyspark
+apache-airflow
+pymodbus
+dask
+category_encoders
+dask-ml
+pymongo
+python-dotenv
+category_encoders
+pyarrow
+boto3
+psycopg2-binary
