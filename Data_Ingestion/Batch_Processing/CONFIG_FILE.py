@@ -1,0 +1,1 @@
+CONFIG_FILE= "config_batch.json"
