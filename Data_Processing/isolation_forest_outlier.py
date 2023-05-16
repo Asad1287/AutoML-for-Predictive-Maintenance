@@ -20,6 +20,29 @@ class IsolationForestOutlierDetector:
             outliers = self.data[outliers == -1]
             return outliers if outliers.size > 0 else None
 
+from sklearn.base import BaseEstimator, TransformerMixin
+from sklearn.ensemble import IsolationForest
+
+class IsolationForestOutlierDetectorTransformer(BaseEstimator, TransformerMixin):
+    def __init__(self, contamination=0.1, remove=False):
+        self.contamination = contamination
+        self.remove = remove
+        self.detector = IsolationForest(contamination=self.contamination)
+
+    def fit(self, X, y=None):
+        self.detector.fit(X)
+        return self
+
+    def transform(self, X):
+        outliers = self.detector.predict(X)
+        if self.remove:
+            return X[outliers == 1, :]
+        else:
+            return X[outliers == -1, :] if (outliers == -1).any() else None
+
+
+
+
 import unittest
 import pandas as pd
 

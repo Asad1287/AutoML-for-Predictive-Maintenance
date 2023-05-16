@@ -2,6 +2,65 @@ import pandas as pd
 import numpy as np
 from sklearn.preprocessing import PolynomialFeatures
 from typing import List
+
+
+from sklearn.base import BaseEstimator, TransformerMixin
+from sklearn.preprocessing import PolynomialFeatures
+
+class PolynomialFeaturesTransformer(BaseEstimator, TransformerMixin):
+    def __init__(self, apply_cols, degree=2, interaction_only=False, include_bias=True):
+        self.apply_cols = apply_cols
+        self.degree = degree
+        self.interaction_only = interaction_only
+        self.include_bias = include_bias
+        self.poly = PolynomialFeatures(degree=self.degree, interaction_only=self.interaction_only, include_bias=self.include_bias)
+        
+    def fit(self, X, y=None):
+        self.poly.fit(X[self.apply_cols])
+        return self
+
+    def transform(self, X):
+        poly_features = self.poly.transform(X[self.apply_cols])
+        # Drop the original columns and concatenate the new polynomial features
+        X = X.drop(self.apply_cols, axis=1)
+        X = pd.concat([X, pd.DataFrame(poly_features, index=X.index)], axis=1)
+        return X
+
+
+class InteractionFeaturesTransformer(BaseEstimator, TransformerMixin):
+    def __init__(self, apply_cols: List[str]):
+        self.apply_cols = apply_cols
+
+    def fit(self, X, y=None):
+        return self
+
+    def transform(self, X):
+        # Create interaction features
+        new_feature = X[self.apply_cols].product(axis=1)
+        # Drop the original columns and add the new interaction feature
+        X = X.drop(self.apply_cols, axis=1)
+        X = pd.concat([X, pd.DataFrame(new_feature, columns=['interaction'])], axis=1)
+        return X
+
+
+
+#from sklearn.datasets import load_iris
+
+#data = load_iris(as_frame=True)
+#df = data.data
+
+#transformer = PolynomialFeaturesTransformer(apply_cols=['sepal length (cm)', 'sepal width (cm)'])
+#df_transformed = transformer.fit_transform(df)
+
+#print(df_transformed)
+
+
+
+
+
+
+
+"""
 class Feature_Engineering:
     def __init__(self, dataframe:pd.DataFrame):
         self.dataframe = dataframe
@@ -47,4 +106,4 @@ class Feature_Engineering:
         #create one hot encoded features
         self.dataframe = pd.get_dummies(self.dataframe, columns=apply_cols)
         return self.dataframe
-    
+"""

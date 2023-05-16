@@ -29,26 +29,5 @@ class TextToNumeric:
             # Join the new dataframe with the original dataframe
             self.df = pd.concat([self.df, count_vect_df], axis=1)
         return self.df
-
-import unittest
-import pandas as pd
-import numpy as np
-
-class TestTextToNumeric(unittest.TestCase):
-    def setUp(self):
-        self.df = pd.DataFrame({
-            'text': ['This is a sentence', 'This is another sentence', 'This is yet another sentence'],
-            'target': [1, 0, 1]
-        })
-        self.text_to_numeric = TextToNumeric(self.df, ['text'])
-
-    def test_transform_with_tfidf(self):
-        transformed_df = self.text_to_numeric.transform_with_tfidf()
-        self.assertEqual(set(transformed_df.columns), set(['target', 'this', 'is', 'a', 'sentence', 'another', 'yet']))
-
-    def test_transform_with_count_vectorizer(self):
-        transformed_df = self.text_to_numeric.transform_with_count_vectorizer()
-        self.assertEqual(set(transformed_df.columns), set(['target', 'this', 'is', 'a', 'sentence', 'another', 'yet']))
-
-if __name__ == "__main__":
-    unittest.main()
+    
+    

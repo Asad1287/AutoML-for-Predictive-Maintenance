@@ -19,6 +19,18 @@ class Imputation:
         df_test_imputed = self.df_test.map_partitions(mean_imputer.transform)
         return df_train_imputed, df_test_imputed
 
+    def mode_imputation_dask(self):
+        mean_imputer = SimpleImputer(strategy='mode')
+        df_train_imputed = self.df_train.map_partitions(mean_imputer.fit_transform)
+        df_test_imputed = self.df_test.map_partitions(mean_imputer.transform)
+        return df_train_imputed, df_test_imputed
+    
+    def median_imputation_dask(self):
+        mean_imputer = SimpleImputer(strategy='median')
+        df_train_imputed = self.df_train.map_partitions(mean_imputer.fit_transform)
+        df_test_imputed = self.df_test.map_partitions(mean_imputer.transform)
+        return df_train_imputed, df_test_imputed
+    
     def median_imputation(self):
         median_imputer = SimpleImputer(strategy='median')
         df_train_imputed = self.df_train.copy()

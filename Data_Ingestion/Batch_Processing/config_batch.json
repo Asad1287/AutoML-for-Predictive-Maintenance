@@ -13,8 +13,8 @@
     "TOPIC" : "sensors/data",
     "ID_COLUMN" : "Product ID",
     "CSV_TARGET_PATH":"/workspaces/AutoML-for-Predictive-Maintenance/Data_Ingestion/Iot_Streaming/received_data.csv",
-    "PROCESSEDDATAPATH" : "/mnt/d/Portfolio/Auto_ML_Pdm/AutoML/Data_Ingestion/BatchProcessing",
-    "FILE_PATH" : "/mnt/d/Portfolio/Auto_ML_Pdm/AutoML/Data_Ingestion/BatchProcessing/ai4i2020.csv"
+    "PROCESSEDDATAPATH" : "/mnt/d/Portfolio/Auto_ML_Pdm/AutoML/Data_Ingestion/Batch_Processing/",
+    "FILE_PATH" : "/mnt/d/Portfolio/Auto_ML_Pdm/AutoML/Data_Ingestion/Batch_Processing/ai4i2020.csv"
 }
 
 

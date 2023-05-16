@@ -134,3 +134,7 @@ X_train, X_test, y_train, y_test= DataIngestion.process_df()
 #convert x_train to pandas dataframe
 print(X_train.shape)
 print(type(X_train))
+
+
+
+
