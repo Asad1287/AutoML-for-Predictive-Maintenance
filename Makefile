@@ -1,8 +1,12 @@
 .PHONY: install lint run test clean
 
 VENV := venv
-PYTHON := $(VENV)/bin/python
-PIP := $(VENV)/bin/pip
+PYTHON := $(VENV)/bin/python3
+PIP := $(VENV)/bin/pip3
+CATCOLS := ['Product ID', 'Type']
+NUMCOLS := ["UDI",'Air temperature [K]', 'Process temperature [K]', 'Rotational speed [rpm]', 'Torque [Nm]', 'Tool wear [min]', 'TWF', 'HDF', 'PWF', 'OSF', 'RNF']
+TARGETCOL := "Machine failure"
+DATECOL := []
 
 install: $(VENV)
 
@@ -27,3 +31,9 @@ clean:
 
 hello:
 	@echo "Hello World"
+
+run_full_training:
+	@$(PYTHON) -m	src.Airflow_train_full.py
+
+setup_constants:
+	@$(PYTHON) -m	src.CONSTANTS
